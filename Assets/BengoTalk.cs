@@ -16,6 +16,7 @@ public class BengoTalk : MonoBehaviour
     [SerializeField] private List<MeshRenderer> BengoRenderers;
     [SerializeField] private List<Material> BengoMaterials;
     [SerializeField] private TextMesh DisplayText;
+    [SerializeField] private GameObject JongoJongo;
 
     string alpha = "0ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     List<string> bengoPeople = new List<string>() { "_Play_", "GoodHood", "Sierra", "Kuro" };
@@ -43,7 +44,7 @@ public class BengoTalk : MonoBehaviour
         "Duke, do you\nwant the ball?",
         "Oh the hamichok",
         "meow meow\nmeowmeow meow,\nmeow meowmeow\nmeowmeow, meow\nmeow meowmeow,\nmeow meow\nmeowmeow",
-        "both of you are\nstupid, okay,\nright jongo\njongo if you\nwant to watch\nyou can have\nthat"
+        "both of you are\nstupid, okay,\nright\nif you want to\nwatch you can\nhave that"
     };
 
     int phraseIndex;
@@ -104,10 +105,11 @@ public class BengoTalk : MonoBehaviour
     void PhraseWordGeneration()
     {
         phraseIndex = Rnd.Range(0, bengoPhrases.Count);
+        JongoJongo.gameObject.SetActive(phraseIndex == 21);
         chosenPhrase = bengoPhrases[phraseIndex];
         DisplayText.text = chosenPhrase;
         targetPhrase = bengoPhrases[phraseIndex + (phraseIndex % 2 == 0 ? 1 : -1)];
-        Log($"The generated phrase is \"{chosenPhrase.Replace("\n", " ")}\".");
+        Log($"The generated phrase is \"{chosenPhrase.Replace("\n", " ")}\".{(phraseIndex == 21 ? " (DLC Unlocked, the words \"jongo jongo\" are replaced by Juliett's pfp)" : "" )}");
         Log($"The target phrase is \"{targetPhrase.Replace("\n", " ")}\".");
 
         targetPos = alpha.IndexOf(chosenPhrase[0].ToString().ToUpperInvariant()) + Bomb.GetBatteryCount() + Bomb.GetPortCount() + 1;
