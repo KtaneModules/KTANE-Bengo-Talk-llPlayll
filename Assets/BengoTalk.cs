@@ -192,6 +192,7 @@ public class BengoTalk : MonoBehaviour
             {
                 yield return null;
                 BengoButtons["TRBL".IndexOf(Command.ToUpperInvariant()[i])].OnInteract();
+                yield return new WaitForSeconds(0.2f);
             }
         }
     }
