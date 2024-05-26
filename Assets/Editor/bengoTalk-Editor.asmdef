@@ -1,0 +1,10 @@
+{
+  "name": "bengoTalk-Editor",
+  "references": [
+    "bengoTalk"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": []
+}
