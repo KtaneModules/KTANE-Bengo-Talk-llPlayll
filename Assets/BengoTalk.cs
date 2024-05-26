@@ -22,18 +22,28 @@ public class BengoTalk : MonoBehaviour
     List<string> SierraNames = new List<string>() { "Acer", "Blaise", "Camia", "Ciel", "Hazel", "Kit", "Mar", "Monika", "Piccolo", "Sage" };
     List<string> bengoPhrases = new List<string>()
     {
-        "Talba Clasic",
-        "Talba Classic",
-        "Talba LOD",
-        "Talba CB",
-        "Ohhhhh, is you\nman bare Tuesday?",
-        "Ohhhh, is you\nman bare Tuesday?",
-        "Ohhh, is you\nman bare Tuesday?",
-        "Ohhhhh, izue\nman baaaare\nChewsday?",
-        "Do you remember\nwhen Starmap\nReconstruction\nhad 6 stars?",
-        "We should really\ntell Nick about\nthat.",
-        "Nah, it's funny.",
-        "breh",
+        "Can I get a\nclock?",
+        "Simon Sings (an\nE flat)",
+        "When the opps\ngive you a MEALY\napple",
+        "QUOTE I WANT TO\nBE REMOVED FROM\nYOUR SOUNDPAD\nENDQUOTE",
+        "Oh hey, a vent!\nThat's not going\nto be\nproblematic.",
+        "Falling, Feeling,\nSwimming,\nSwinging,\nSinging, Sinking,\nDying, Diving",
+        "the grade has\nchanged",
+        "Singing,\nSinking, Dying,\nDiving, Loving,\nLeaving, Pulling,\nPushing",
+        "Ohhhhh, it's ten\ntimes",
+        "Ohh, it's a\nmicrophone",
+        "Oh hey, a vent!\nThat's not going\nto be a\nproblematic.",
+        "Its actually\nvery clampicated",
+        "Ohhhh, is you\nman bare\nTuesday?",
+        "We should really\ntell nick about\nthat. Nah, it's\nfunny.",
+        "Do you remember\nwhen Starmap\nReconstruction\nhad SIX stars?",
+        "hollup... Let\nhim cook",
+        "It's as shrimple\nas that",
+        "Monsplode\nTrading Cards,\ntrade Lanaluff.",
+        "Duke, do you\nwant the ball?",
+        "Oh the hamichok",
+        "meow meow\nmeowmeow meow,\nmeow meowmeow\nmeowmeow, meow\nmeow meowmeow,\nmeow meow\nmeowmeow",
+        "both of you are\nstupid, okay,\nright jongo\njongo if you\nwant to watch\nyou can have\nthat"
     };
 
     int phraseIndex;
@@ -126,7 +136,7 @@ public class BengoTalk : MonoBehaviour
     {
         int sierraFronterPos = Bomb.GetIndicators().ToList().Count + Bomb.GetSerialNumberNumbers().Last() + 1;
         sierraFronter = SierraNames[(sierraFronterPos - 1) % 10];
-        Log($"The person fronting Sierra is at position {sierraFronterPos} and their name is {sierraFronter}");
+        Log($"The Sierra's Fronter is at position {sierraFronterPos} and their name is {sierraFronter}");
 
         int currentIdx = bengoNames.IndexOf("Sierra");
         string currentLetter = sierraFronter[0].ToString();
@@ -147,7 +157,7 @@ public class BengoTalk : MonoBehaviour
 
     string RemoveSpecialChars(string s)
     {
-        string specialChars = "\',.?!";
+        string specialChars = "',.?!()";
         for (int i = 0; i < specialChars.Length; i++)
         {
             s = s.Replace(specialChars[i].ToString(), null);
