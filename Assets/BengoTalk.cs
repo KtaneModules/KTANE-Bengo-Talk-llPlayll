@@ -35,7 +35,7 @@ public class BengoTalk : MonoBehaviour
         "Ohh, it's a\nmicrophone",
         "Oh hey, a vent!\nThat's not going\nto be a\nproblematic.",
         "Its actually\nvery clampicated",
-        "Ohhhh, is you\nman bare\nTuesday?",
+        "Ohhhh, is you\nman like bare\nTuesday?",
         "We should really\ntell nick about\nthat. Nah, it's\nfunny.",
         "Do you remember\nwhen Starmap\nReconstruction\nhad SIX stars?",
         "hollup... Let\nhim cook",
@@ -44,7 +44,11 @@ public class BengoTalk : MonoBehaviour
         "Duke, do you\nwant the ball?",
         "Oh the hamichok",
         "meow meow\nmeowmeow meow,\nmeow meowmeow\nmeowmeow, meow\nmeow meowmeow,\nmeow meow\nmeowmeow",
-        "both of you are\nstupid, okay,\nright\nif you want to\nwatch you can\nhave that"
+        "both of you are\nstupid, okay,\nright jongo jongo\nif you want to\nwatch you can\nhave that",
+        "Talba Classic,\nTalba LOD,\nTalba Classic,\nTalba LOD",
+        "Look at the left\narrow, and then\nlook at FMN,\nthen press up.",
+        "The Festive KTaNE\nfestive the KTaNE\njukebox festive\nfestive jukebox\nKTaNE the jukebox\nfestive playing the\nfestive KTaNE\njukebox music",
+        "(I am the\nsmallest\ndefinitely)"
     };
 
     int phraseIndex;
@@ -107,9 +111,10 @@ public class BengoTalk : MonoBehaviour
         phraseIndex = Rnd.Range(0, bengoPhrases.Count);
         JongoJongo.gameObject.SetActive(phraseIndex == 21);
         chosenPhrase = bengoPhrases[phraseIndex];
-        DisplayText.text = chosenPhrase;
+        DisplayText.text = chosenPhrase.Replace(" jongo jongo", "");
+        DisplayText.fontSize = phraseIndex == 24 ? 250 : 300;
         targetPhrase = bengoPhrases[phraseIndex + (phraseIndex % 2 == 0 ? 1 : -1)];
-        Log($"The generated phrase is \"{chosenPhrase.Replace("\n", " ")}\".{(phraseIndex == 21 ? " (DLC Unlocked, the words \"jongo jongo\" are replaced by Juliett's pfp)" : "" )}");
+        Log($"The generated phrase is \"{chosenPhrase.Replace("\n", " ")}\".{(phraseIndex == 21 ? " (DLC Unlocked, each \"jongo\" is replaced by Juliett's pfp)" : "" )}");
         Log($"The target phrase is \"{targetPhrase.Replace("\n", " ")}\".");
 
         targetPos = alpha.IndexOf(chosenPhrase[0].ToString().ToUpperInvariant()) + Bomb.GetBatteryCount() + Bomb.GetPortCount() + 1;
