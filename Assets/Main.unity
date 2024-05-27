@@ -152,16 +152,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 102332431100764900, guid: cbf9c80757fb77248b9772cd77f8f66e,
-        type: 2}
-      propertyPath: m_Text
-      value: breh
-      objectReference: {fileID: 0}
-    - target: {fileID: 102332431100764900, guid: cbf9c80757fb77248b9772cd77f8f66e,
-        type: 2}
-      propertyPath: m_FontSize
-      value: 250
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cbf9c80757fb77248b9772cd77f8f66e, type: 2}
   m_IsPrefabParent: 0
