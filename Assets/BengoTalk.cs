@@ -27,7 +27,7 @@ public class BengoTalk : MonoBehaviour
     List<string> bengoPhrases = new List<string>()
     {
         "Excuse me,\ncan I get a\nclock?",
-        "Simon Sings (an\nE flat)",
+        "Simon Sings\n(an E flat)",
         "When the opps\ngive you a\nMEALY apple",
         "QUOTE I WANT\nTO BE REMOVED\nFROM YOUR\nSOUNDPAD\nENDQUOTE",
         "Oh hey, a vent!\nThat's not\ngoing to be\nproblematic.",
@@ -65,7 +65,7 @@ public class BengoTalk : MonoBehaviour
 
     int submissionIdx = 0;
 
-    static int ModuleIdCounter = 1;
+    static int ModuleIdCounter = 0;
     int ModuleId;
     private bool ModuleSolved;
 
@@ -119,7 +119,7 @@ public class BengoTalk : MonoBehaviour
 
     void PhraseWordGeneration()
     {
-        phraseIndex = Rnd.Range(0, bengoPhrases.Count);
+        phraseIndex = ModuleId;
         JongoJongo.gameObject.SetActive(phraseIndex == 21);
         chosenPhrase = bengoPhrases[phraseIndex];
         DisplayText.text = chosenPhrase.Replace(" jongo jongo", "");
