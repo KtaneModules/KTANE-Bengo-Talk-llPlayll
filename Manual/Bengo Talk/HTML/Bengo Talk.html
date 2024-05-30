@@ -16,11 +16,12 @@
 
         .page-footer::before { content: 'Page '; }
         .page-footer::after { content: ' of 3'; }
+        .page.strip::before { --strip-color: #26282C; opacity: 0.5;}
     </style>
 </head>
 <body>
     <div class="section">
-        <div class="page page-bg-01">
+        <div class="page page-bg-01 strip">
             <div class="page-header">
                 <span class="page-header-doc-title">Keep Talking and Nobody Explodes Mod</span>
                 <span class="page-header-section-title">Bengo Talk</span>
@@ -29,15 +30,16 @@
                 <img src="img/Component/Bengo Talk.svg" class="diagram">
                 <h2>On the Subject of Bengo Talk</h2>
                 <p class="flavour-text">breh is the best bomb ever, on com!</p>
-
-                <p>This module contains a display in the center displaying a phrase from the table on the second page, and 4 buttons with people from the Bengo group on them.
-                    Their nicknames and profile pictures can be found below.</p>
+                
+                <p>In this module, 4 friends from the Bengo friend group are sitting in a voice channel in Discord and participating in a silly activity -
+                    pronouncing a phrase <u>one letter at a time</u>. You must figure out the order in which the friends will say the letters of the word they are currently on.</p>
+                <p>The nicknames and profile pictures of the Bengo people can be found below.</p>
                 <table>
                     <tr>
-                        <td><img class="centered-img" src="img/Bengo Talk/_Play_.png" style="width: 70%;"></td>
-                        <td><img class="centered-img" src="img/Bengo Talk/GoodHood.png" style="width: 70%;"></td>
-                        <td><img class="centered-img" src="img/Bengo Talk/Sierra.png" style="width: 70%;"></td>
-                        <td><img class="centered-img" src="img/Bengo Talk/Kuro.png" style="width: 70%;"></td>
+                        <td><img class="centered-img" src="img/Bengo Talk/_Play_.png" style="width: 80%;"></td>
+                        <td><img class="centered-img" src="img/Bengo Talk/GoodHood.png" style="width: 80%;"></td>
+                        <td><img class="centered-img" src="img/Bengo Talk/Sierra.png" style="width: 80%;"></td>
+                        <td><img class="centered-img" src="img/Bengo Talk/Kuro.png" style="width: 80%;"></td>
                     </tr>
                     <tr>
                         <td>_Play_</td>
@@ -46,21 +48,21 @@
                         <td>Kuro</td>
                     </tr>
                 </table>
-                <p>To solve the module, submit a <u>Target Word</u> from a <u>Target Phrase</u> using the buttons.
-                    The solving process is split into 2 steps, both of which can found below.</p><br>
+                <p>The solving process of this module is split into 2 steps, both of which can found below.</p><br>
 
                 <h3>Step 1: Finding the Target Word</h3>
-                <p>The phrase on the module will be called the <u>Generated Phrase</u>.
-                <p>As said above, the <u>Generated Phrase</u> can be found in the table on the second page.
-                    The phrase directly to the side of the <u>Generated Phrase</u> in the table will be called the <u>Target Phrase</u>.</p>
-                <p>Take the sum of the alphabetic position of the first letter in the <u>Generated Phrase</u> (A1Z26), the amount of batteries and ports, and add 1 to it.
-                    Call this the <u>Target Position</u>. Take the <u>Target Position</u>-th word in the <u>Target Phrase</u> (looping around to the start upon reaching the end of the phrase, words are seperated by spaces, ignore other punctuation marks).
-                    That word is the <u>Target Word</u>.
+                <p>The phrase on the left side of the module will be called the <u>Generated Phrase</u>.
+                <p>As said before, the <u>Generated Phrase</u> can be found in the table on the second page.
+                    The phrase directly to the side of the <u>Generated Phrase</u> in the table will be called the <u>Target Phrase</u>.
+                    This is the phrase that the friends are currently trying to pronounce.</p>
+                <p>Take the sum of the alphabetic position of the first letter in the <u>Generated Phrase</u> (A1Z26), the amount of batteries and the amount of ports. Then add 1 to the sum.
+                    Call the result - the <u>Target Position</u>. Take the <u>Target Position</u>-th word in the <u>Target Phrase</u> (looping around to the start upon reaching the end of the phrase; words are seperated by spaces; ignore other punctuation marks).
+                    That word is the <u>Target Word</u>. This is the word that the friends are currently on.
             </div>
             <div class="page-footer relative-footer">1</div>
         </div>
 
-        <div class="page page-bg-02">
+        <div class="page page-bg-03 strip">
             <div class="page-header">
                 <span class="page-header-doc-title">Keep Talking and Nobody Explodes Mod</span>
                 <span class="page-header-section-title">Bengo Talk</span>
@@ -68,7 +70,7 @@
             <div class="page-content">      
                 <table>
                     <tr>
-                        <td>Can I get a clock?</td>
+                        <td>Excuse me, can I get a clock?</td>
                         <td>Simon Sings (an E flat)</td>
                     </tr>
                     <tr>
@@ -93,7 +95,7 @@
                     </tr>
                     <tr>
                         <td>Ohhhh, is you man like bare Tuesday?</td>
-                        <td>We should really tell nick about that. Nah, it’s funny.</td>
+                        <td>We should really tell Nick about that. Nah, it’s funny.</td>
                     </tr>
                     <tr>
                         <td>Do you remember when Starmap Reconstruction had SIX stars?</td>
@@ -125,7 +127,7 @@
             <div class="page-footer relative-footer">2</div>
         </div>
 
-        <div class="page page-bg-03">
+        <div class="page page-bg-04 strip">
             <div class="page-header">
                 <span class="page-header-doc-title">Keep Talking and Nobody Explodes Mod</span>
                 <span class="page-header-section-title">Bengo Talk</span>
@@ -164,15 +166,15 @@
                     </tr>
                 </table>
                 <p>The person controlling the system’s body is called the “<u>Fronter</u>”.
-                    To figure out who is the <u>Fronter</u> of the Sierra system on the module, take the sum of the amount of indicators and the last digit of the serial number, and add 1 to it.
-                    In the table, take the person at the position of the number you just got in reading order (looping around back to Acer upon going forward from Sage). That person is the <u>Fronter</u> of the system.
+                    To figure out who is the <u>Fronter</u> of the Sierra system on the module, take the sum of the amount of indicators and the last digit of the serial number. Then add 1 to the sum.
+                    In the table, take the person at the position of the number you just got in reading order (looping around back to Acer upon going forward from Sage). That person is the <u>Fronter</u> of Sierra.
                 </p>
-                <p>Assign the first letter of the Sierra <u>Fronter</u>’s name to the Sierra button on the module.
-                    Assign the rest of the letters from the alphabet going clockwise from the Sierra button and forward through the alphabet (Looping back to A upon going forward from Z).</p>
-                <p>Example: the order of people in clockwise order is: GoodHood, Sierra, Kuro, _Play_. Sierra’s <u>Fronter</u> is Monika.
+                <p>Assign the first letter of the Sierra <u>Fronter</u>’s name to the Sierra button on the right side of the module.
+                    Assign the rest of the letters from the alphabet going down from the Sierra button (with wraparound) and forward through the alphabet (Looping back to A upon going forward from Z).</p>
+                <p>Example: the order of people (top to bottom) is: GoodHood, Sierra, Kuro, _Play_. Sierra’s <u>Fronter</u> is Monika.
                     First, the letter M is assigned to the Sierra button, then the letter N is assigned to the Kuro button, then O - to _Play_, P - to GoodHood, and so on until the final letter L is assigned to the Kuro button.</p>
-                <p>Finally, use the buttons’ assigned letters to submit the <u>Target Word</u> by pressing the buttons that have been  each letter of the <u>Target Word</u> in order.</p>
-                <p>If an incorrect button was pressed, the module will strike and will NOT reset. Once the <u>Target Word</u> is fully submitted, the module will solve.</p>
+                <p>Finally, use the buttons’ assigned letters to submit the <u>Target Word</u> letter by letter by pressing the buttons that have been assigned each letter of the <u>Target Word</u> in order.
+                    If an incorrect button was pressed, the module will strike and will NOT reset. Once the <u>Target Word</u> is fully submitted, the module will solve.</p>
             </div>
             <div class="page-footer relative-footer">3</div>
         </div>

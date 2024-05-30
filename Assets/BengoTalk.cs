@@ -15,6 +15,7 @@ public class BengoTalk : MonoBehaviour
     [SerializeField] private List<KMSelectable> BengoButtons;
     [SerializeField] private List<MeshRenderer> BengoRenderers;
     [SerializeField] private List<Material> BengoMaterials;
+    [SerializeField] private List<Material> BengoHLMaterials;
     [SerializeField] private TextMesh DisplayText;
     [SerializeField] private GameObject JongoJongo;
 
@@ -23,33 +24,34 @@ public class BengoTalk : MonoBehaviour
     List<string> SierraNames = new List<string>() { "Acer", "Blaise", "Camia", "Ciel", "Hazel", "Kit", "Mar", "Monika", "Piccolo", "Sage" };
     List<string> bengoPhrases = new List<string>()
     {
-        "Can I get a\nclock?",
+        "Excuse me,\ncan I get a\nclock?",
         "Simon Sings (an\nE flat)",
-        "When the opps\ngive you a MEALY\napple",
-        "QUOTE I WANT TO\nBE REMOVED FROM\nYOUR SOUNDPAD\nENDQUOTE",
-        "Oh hey, a vent!\nThat's not going\nto be\nproblematic.",
+        "When the opps\ngive you a\nMEALY apple",
+        "QUOTE I WANT\nTO BE REMOVED\nFROM YOUR\nSOUNDPAD\nENDQUOTE",
+        "Oh hey, a vent!\nThat's not\ngoing to be\nproblematic.",
         "Falling, Feeling,\nSwimming,\nSwinging,\nSinging, Sinking,\nDying, Diving",
         "the grade has\nchanged",
-        "Singing,\nSinking, Dying,\nDiving, Loving,\nLeaving, Pulling,\nPushing",
-        "Ohhhhh, it's ten\ntimes",
+        "Singing, Sinking,\nDying, Diving,\nLoving, Leaving,\nPulling, Pushing",
+        "Ohhhhh,\nit's ten times",
         "Ohh, it's a\nmicrophone",
-        "Oh hey, a vent!\nThat's not going\nto be a\nproblematic.",
-        "Its actually\nvery clampicated",
+        "Oh hey, a vent!\nThat's not\ngoing to be\na problematic.",
+        "Its actually very\nclampicated",
         "Ohhhh, is you\nman like bare\nTuesday?",
-        "We should really\ntell nick about\nthat. Nah, it's\nfunny.",
+        "We should\nreally tell Nick\nabout that.\nNah, it's funny.",
         "Do you remember\nwhen Starmap\nReconstruction\nhad SIX stars?",
-        "hollup... Let\nhim cook",
+        "hollup...\nLet him cook",
         "It's as shrimple\nas that",
         "Monsplode\nTrading Cards,\ntrade Lanaluff.",
         "Duke, do you\nwant the ball?",
-        "Oh the hamichok",
-        "meow meow\nmeowmeow meow,\nmeow meowmeow\nmeowmeow, meow\nmeow meowmeow,\nmeow meow\nmeowmeow",
-        "both of you are\nstupid, okay,\nright jongo jongo\nif you want to\nwatch you can\nhave that",
+        "Oh the\nhamichok",
+        "meow meow meowmeow\nmeow, meow meowmeow\nmeowmeow, meow meow\nmeowmeow, meow meow\nmeowmeow",
+        "both of you are\nstupid, okay,\nright jongo jongo\nif you want to watch\nyou can have that",
         "Talba Classic,\nTalba LOD,\nTalba Classic,\nTalba LOD",
         "Look at the left\narrow, and then\nlook at FMN,\nthen press up.",
-        "The Festive KTaNE\nfestive the KTaNE\njukebox festive\nfestive jukebox\nKTaNE the jukebox\nfestive playing the\nfestive KTaNE\njukebox music",
-        "(I am the\nsmallest\ndefinitely)"
+        "The Festive KTaNE festive\nthe KTaNE jukebox festive\nfestive jukebox KTaNE the\njukebox festive playing the\nfestive KTaNE jukebox music",
+        "(I am the smallest definitely)"
     };
+    List<int> comfyTextSizes = new List<int>() { 120, 115, 90, 75, 90, 75, 100, 85, 110, 120, 90, 90, 100, 90, 75, 110, 95, 95, 100, 145, 54, 70, 95, 90, 50, 40 };
 
     int phraseIndex;
     string chosenPhrase, targetPhrase;
@@ -70,6 +72,8 @@ public class BengoTalk : MonoBehaviour
         ModuleId = ModuleIdCounter++;
         foreach (KMSelectable bengo in BengoButtons) {
             bengo.OnInteract += delegate () { BengoPressed(bengo); return false; };
+            bengo.OnHighlight += delegate () { BengoRenderers[BengoButtons.IndexOf(bengo)].material = BengoHLMaterials[bengoPeople.IndexOf(bengoNames[BengoButtons.IndexOf(bengo)])]; };
+            bengo.OnHighlightEnded += delegate () { BengoRenderers[BengoButtons.IndexOf(bengo)].material = BengoMaterials[bengoPeople.IndexOf(bengoNames[BengoButtons.IndexOf(bengo)])]; };
             }
     }
 
@@ -112,7 +116,7 @@ public class BengoTalk : MonoBehaviour
         JongoJongo.gameObject.SetActive(phraseIndex == 21);
         chosenPhrase = bengoPhrases[phraseIndex];
         DisplayText.text = chosenPhrase.Replace(" jongo jongo", "");
-        DisplayText.fontSize = phraseIndex == 24 ? 250 : 300;
+        DisplayText.fontSize = comfyTextSizes[phraseIndex];
         targetPhrase = bengoPhrases[phraseIndex + (phraseIndex % 2 == 0 ? 1 : -1)];
         Log($"The generated phrase is \"{chosenPhrase.Replace("\n", " ")}\".{(phraseIndex == 21 ? " (DLC Unlocked, each \"jongo\" is replaced by Juliett's pfp)" : "" )}");
         Log($"The target phrase is \"{targetPhrase.Replace("\n", " ")}\".");
