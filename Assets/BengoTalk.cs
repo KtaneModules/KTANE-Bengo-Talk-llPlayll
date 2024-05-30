@@ -65,7 +65,7 @@ public class BengoTalk : MonoBehaviour
 
     int submissionIdx = 0;
 
-    static int ModuleIdCounter = 0;
+    static int ModuleIdCounter = 1;
     int ModuleId;
     private bool ModuleSolved;
 
@@ -119,7 +119,7 @@ public class BengoTalk : MonoBehaviour
 
     void PhraseWordGeneration()
     {
-        phraseIndex = ModuleId;
+        phraseIndex = Rnd.Range(0, bengoPhrases.Count);
         JongoJongo.gameObject.SetActive(phraseIndex == 21);
         chosenPhrase = bengoPhrases[phraseIndex];
         DisplayText.text = chosenPhrase.Replace(" jongo jongo", "");
