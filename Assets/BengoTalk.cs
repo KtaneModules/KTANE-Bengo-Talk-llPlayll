@@ -53,6 +53,7 @@ public class BengoTalk : MonoBehaviour
         "The Festive KTaNE festive\nthe KTaNE jukebox festive\nfestive jukebox KTaNE the\njukebox festive playing the\nfestive KTaNE jukebox music",
         "(I am the smallest definitely)"
     };
+    List<int> firstLetterPos = new List<int>() { 5, 19, 23, 17, 15, 6, 20, 19, 15, 15, 15, 9, 15, 23, 4, 8, 9, 13, 4, 15, 13, 2, 20, 12, 20, 9 };
     List<int> comfyTextSizes = new List<int>() { 120, 115, 90, 75, 90, 75, 100, 85, 110, 120, 90, 90, 100, 90, 75, 110, 95, 95, 100, 145, 54, 70, 95, 90, 50, 40 };
 
     int phraseIndex;
@@ -128,7 +129,7 @@ public class BengoTalk : MonoBehaviour
         Log($"The generated phrase is \"{chosenPhrase.Replace("\n", " ")}\".{(phraseIndex == 21 ? " (DLC Unlocked, each \"jongo\" is replaced by Juliett's pfp)" : "" )}");
         Log($"The target phrase is \"{targetPhrase.Replace("\n", " ")}\".");
 
-        targetPos = alpha.IndexOf(chosenPhrase[0].ToString().ToUpperInvariant()) + Bomb.GetBatteryCount() + Bomb.GetPortCount() + 1;
+        targetPos = firstLetterPos[phraseIndex] + Bomb.GetBatteryCount() + Bomb.GetPortCount() + 1;
         string[] targetPhraseWords = targetPhrase.Replace("\n", " ").Split(' ');
         targetWord = RemoveSpecialChars(targetPhraseWords[(targetPos - 1) % targetPhraseWords.Length]);
         Log($"The target word is at position {targetPos} and it is \"{targetWord}\"");
