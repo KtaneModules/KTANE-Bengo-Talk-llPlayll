@@ -18,6 +18,8 @@ public class BengoTalk : MonoBehaviour
     [SerializeField] private List<Material> BengoHLMaterials;
     [SerializeField] private TextMesh DisplayText;
     [SerializeField] private GameObject JongoJongo;
+    [SerializeField] private AudioClip KuroStrike;
+    [SerializeField] private AudioClip KuroSolve;
 
     string alpha = "0ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     List<string> bengoPeople = new List<string>() { "_Play_", "GoodHood", "Sierra", "Kuro" };
@@ -80,11 +82,11 @@ public class BengoTalk : MonoBehaviour
     void BengoPressed(KMSelectable person)
     {
         Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, person.gameObject.transform);
+        person.AddInteractionPunch();
         if (ModuleSolved)
         {
             return;
         }
-        person.AddInteractionPunch();
         bool submissionCorrect = assignedLetters[BengoButtons.IndexOf(person)].Contains(targetWord[submissionIdx].ToString().ToUpperInvariant());
         Log($"The {bengoNames[BengoButtons.IndexOf(person)]} button was used to submit the letter {targetWord[submissionIdx].ToString().ToUpperInvariant()}, {(submissionCorrect ? "correct." : "Strike!" )}");
         if (submissionCorrect)
@@ -95,11 +97,16 @@ public class BengoTalk : MonoBehaviour
                 Log("The target word was fully submitted, Module Solved!");
                 GetComponent<KMBombModule>().HandlePass();
                 ModuleSolved = true;
+                StartCoroutine("SolveRoutine");
             }
         }
         else
         {
             GetComponent<KMBombModule>().HandleStrike();
+            if (Rnd.Range(1, 6) == 1)
+            {
+                Audio.PlaySoundAtTransform(KuroStrike.name, transform);
+            }
         }
 }
 
@@ -181,8 +188,23 @@ public class BengoTalk : MonoBehaviour
         Debug.Log($"[Bengo Talk #{ModuleId}] {arg}");
     }
 
+    IEnumerator SolveRoutine()
+    {
+        yield return new WaitForSeconds(0.2f);
+        foreach (KMSelectable bengo in BengoButtons)
+        {
+            bengo.OnHighlightEnded();
+        }
+        if (Rnd.Range(1, 11) == 1)
+        {
+            yield return new WaitForSeconds(0.3f);
+            Audio.PlaySoundAtTransform(KuroSolve.name, transform);
+        }
+
+    }
+
 #pragma warning disable 414
-    private readonly string TwitchHelpMessage = @"Use <!{0} t/r/b/l> to press the top/right/bottom/left button. Chain commands without spaces, e.g. <!{0} trlbrrl>.";
+    private readonly string TwitchHelpMessage = @"Use <!{0} 1/2/3/4> to press the 1st/2nd/3rd/4th button top to bottom. Chain commands without spaces, e.g. <!{0} 1243224>.";
 #pragma warning restore 414
 
     IEnumerator ProcessTwitchCommand(string Command)
@@ -190,7 +212,7 @@ public class BengoTalk : MonoBehaviour
         bool commandValid = true;
         for (int i = 0; i < Command.Length; i++)
         {
-            if (!"TRBL".Contains(Command.ToUpperInvariant()[i]))
+            if (!"1234".Contains(Command[i]))
             {
                 commandValid = false;
                 yield return "sendtochatmessage Invalid button names!";
@@ -202,8 +224,11 @@ public class BengoTalk : MonoBehaviour
             for (int i = 0; i < Command.Length; i++)
             {
                 yield return null;
-                BengoButtons["TRBL".IndexOf(Command.ToUpperInvariant()[i])].OnInteract();
+                int btnIdx = "1234".IndexOf(Command[i]);
+                BengoButtons[btnIdx].OnHighlight();
+                BengoButtons[btnIdx].OnInteract();
                 yield return new WaitForSeconds(0.2f);
+                BengoButtons[btnIdx].OnHighlightEnded();
             }
         }
     }
@@ -217,11 +242,14 @@ public class BengoTalk : MonoBehaviour
             {
                 if (assignedLetters[j].Contains(targetWord[i].ToString().ToUpperInvariant()))
                 {
+                    BengoButtons[j].OnHighlight();
                     BengoButtons[j].OnInteract();
+                    yield return new WaitForSeconds(0.2f);
+                    BengoButtons[j].OnHighlightEnded();
                     break;
                 }
             }
-            yield return new WaitForSeconds(0.2f);
+            
         }
     }
 }
