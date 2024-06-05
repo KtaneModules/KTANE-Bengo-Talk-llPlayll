@@ -20,6 +20,10 @@ public class BengoTalk : MonoBehaviour
     [SerializeField] private GameObject JongoJongo;
     [SerializeField] private AudioClip KuroStrike;
     [SerializeField] private AudioClip KuroSolve;
+    [SerializeField] private GameObject CatObject;
+    [SerializeField] private List<Material> CatMaterials;
+    [SerializeField] private GameObject HiddenCatObject;
+    [SerializeField] private List<Material> HiddenCatMaterials;
 
     string alpha = "0ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     List<string> bengoPeople = new List<string>() { "_Play_", "GoodHood", "Sierra", "Kuro" };
@@ -51,10 +55,24 @@ public class BengoTalk : MonoBehaviour
         "Talba Classic,\nTalba LOD,\nTalba Classic,\nTalba LOD",
         "Look at the left\narrow, and then\nlook at FMN,\nthen press up.",
         "The Festive KTaNE festive\nthe KTaNE jukebox festive\nfestive jukebox KTaNE the\njukebox festive playing the\nfestive KTaNE jukebox music",
-        "(I am the smallest definitely)"
+        "(I am the smallest definitely)",
+        "Wear ever\nyou go their\nyour.",
+        "YOU HAVE\nVIOLATED AN\nAREA PROTECTED\nBY... A SECURITY\nSYSTEM.",
+        "Play make\nthe sound.",
+        "Peanut or Done? Oh\nno, Done is the\nname of the dog. Oh\nno, I can actually\nname the dog!",
+        "The classic\nwood stick\nstone.",
+        "They made\nthis one\nimpossible!",
+        "I foind fishe!\nI foind fishe!",
+        "Ze blootooth dewice\nis cannected uhhh\nsuccssesfulleh",
+        "Do you remember when you\nwanted to scream and then\nyou pressed the center\nbutton 3 times and then you\nstill wanted to scream?",
+        "can you find cat",
+        "I'm back at\nWhack a\nTotem.",
+        "Dancing, walking,\nrearranging\nfurniture.",
+        "You HAVE to know\nthis! Here's the\nmoves it starts with.\nThey don't know,\nthey just see this.",
+        "one upon a time"
     };
-    List<int> firstLetterPos = new List<int>() { 5, 19, 23, 17, 15, 6, 20, 19, 15, 15, 15, 9, 15, 23, 4, 8, 9, 13, 4, 15, 13, 2, 20, 12, 20, 9 };
-    List<int> comfyTextSizes = new List<int>() { 120, 115, 90, 75, 90, 75, 100, 85, 110, 120, 90, 90, 100, 90, 75, 110, 95, 95, 100, 145, 54, 70, 95, 90, 50, 40 };
+    List<int> firstLetterPos = new List<int>() { 5, 19, 23, 17, 15, 6, 20, 19, 15, 15, 15, 9, 15, 23, 4, 8, 9, 13, 4, 15, 13, 2, 20, 12, 20, 9, 23, 25, 16, 16, 20, 20, 9, 26, 4, 3, 9, 4, 25, 15 };
+    List<int> comfyTextSizes = new List<int>() { 120, 115, 90, 75, 90, 75, 100, 85, 110, 120, 90, 90, 100, 90, 75, 110, 95, 95, 100, 145, 54, 70, 95, 90, 50, 40, 120, 70, 140, 70, 125, 125, 115, 70, 50, 85, 130, 80, 70, 85 };
 
     int phraseIndex;
     string chosenPhrase, targetPhrase;
@@ -63,6 +81,7 @@ public class BengoTalk : MonoBehaviour
     int targetPos;
     string sierraFronter;
     List<string> assignedLetters = new List<string>() { "", "", "", "" };
+    int catIndex;
 
     int submissionIdx = 0;
 
@@ -77,7 +96,16 @@ public class BengoTalk : MonoBehaviour
             bengo.OnInteract += delegate () { BengoPressed(bengo); return false; };
             bengo.OnHighlight += delegate () { BengoRenderers[BengoButtons.IndexOf(bengo)].material = BengoHLMaterials[bengoPeople.IndexOf(bengoNames[BengoButtons.IndexOf(bengo)])]; };
             bengo.OnHighlightEnded += delegate () { BengoRenderers[BengoButtons.IndexOf(bengo)].material = BengoMaterials[bengoPeople.IndexOf(bengoNames[BengoButtons.IndexOf(bengo)])]; };
-            }
+        }
+        HiddenCatObject.GetComponent<KMSelectable>().OnInteract += delegate () { CatFound(); return false; };
+    }
+
+    void CatFound()
+    {
+        Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, HiddenCatObject.gameObject.transform);
+        HiddenCatObject.GetComponent<KMSelectable>().AddInteractionPunch();
+        Log("You found cat, meow!");
+        HiddenCatObject.SetActive(false);
     }
 
     void BengoPressed(KMSelectable person)
@@ -122,8 +150,21 @@ public class BengoTalk : MonoBehaviour
     {
         phraseIndex = Rnd.Range(0, bengoPhrases.Count);
         JongoJongo.gameObject.SetActive(phraseIndex == 21);
+        if (phraseIndex == 35)
+        {
+            catIndex = Rnd.Range(0, CatMaterials.Count);
+            CatObject.gameObject.SetActive(true);
+            CatObject.GetComponent<MeshRenderer>().material = CatMaterials[catIndex];
+            HiddenCatObject.gameObject.SetActive(true);
+            HiddenCatObject.GetComponent<MeshRenderer>().material = HiddenCatMaterials[catIndex];
+            HiddenCatObject.gameObject.transform.localPosition += new Vector3(Rnd.Range(0, 0.1201f), 0, Rnd.Range(0, 0.1563f));
+        }
+        else
+        {
+            HiddenCatObject.gameObject.SetActive(false);
+        }
         chosenPhrase = bengoPhrases[phraseIndex];
-        DisplayText.text = chosenPhrase.Replace(" jongo jongo", "");
+        DisplayText.text = chosenPhrase.Replace(" jongo jongo", "").Replace(" cat", "");
         DisplayText.fontSize = comfyTextSizes[phraseIndex];
         targetPhrase = bengoPhrases[phraseIndex + (phraseIndex % 2 == 0 ? 1 : -1)];
         Log($"The generated phrase is \"{chosenPhrase.Replace("\n", " ")}\".{(phraseIndex == 21 ? " (DLC Unlocked, each \"jongo\" is replaced by Juliett's pfp)" : "" )}");
