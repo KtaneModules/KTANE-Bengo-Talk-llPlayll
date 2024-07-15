@@ -20,6 +20,6 @@ MonoBehaviour:
 
 
     Developed by _Play_.'
-  version: 2.1
+  version: 2.2
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 773bc24f004e9b740995e88f25e46c85, type: 3}

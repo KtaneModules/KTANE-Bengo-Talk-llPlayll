@@ -69,10 +69,14 @@ public class BengoTalk : MonoBehaviour
         "I'm back at\nWhack a\nTotem.",
         "Dancing, walking,\nrearranging\nfurniture.",
         "You HAVE to know\nthis! Here's the\nmoves it starts with.\nThey don't know,\nthey just see this.",
-        "one upon a time"
+        "one upon a time",
+        "Twenty three in\nninety when you're\nboth ready.",
+        "I can feel the\nDelirium coming\ninside me.",
+        "Buy me Prada!\n(no-no, no)\nBalenciaga!\n(no-no, no)",
+        "No, I need\nto zoom!"
     };
-    List<int> firstLetterPos = new List<int>() { 5, 19, 23, 17, 15, 6, 20, 19, 15, 15, 15, 9, 15, 23, 4, 8, 9, 13, 4, 15, 13, 2, 20, 12, 20, 9, 23, 25, 16, 16, 20, 20, 9, 26, 4, 3, 9, 4, 25, 15 };
-    List<int> comfyTextSizes = new List<int>() { 120, 115, 90, 75, 90, 75, 100, 85, 110, 120, 90, 90, 100, 90, 75, 110, 95, 95, 100, 145, 54, 70, 95, 90, 50, 40, 120, 70, 140, 70, 125, 125, 115, 70, 50, 85, 130, 80, 70, 85 };
+    List<int> firstLetterPos = new List<int>() { 5, 19, 23, 17, 15, 6, 20, 19, 15, 15, 15, 9, 15, 23, 4, 8, 9, 13, 4, 15, 13, 2, 20, 12, 20, 9, 23, 25, 16, 16, 20, 20, 9, 26, 4, 3, 9, 4, 25, 15, 20, 9, 2, 14 };
+    List<int> comfyTextSizes = new List<int>() { 120, 115, 90, 75, 90, 75, 100, 85, 110, 120, 90, 90, 100, 90, 75, 110, 95, 95, 100, 145, 54, 70, 95, 90, 50, 40, 120, 70, 140, 70, 125, 125, 115, 70, 50, 85, 130, 80, 70, 85, 75, 85, 90, 140 };
 
     int phraseIndex;
     string chosenPhrase, targetPhrase;
@@ -217,7 +221,7 @@ public class BengoTalk : MonoBehaviour
 
     string RemoveSpecialChars(string s)
     {
-        string specialChars = "',.?!()";
+        string specialChars = "',.?!()-";
         for (int i = 0; i < specialChars.Length; i++)
         {
             s = s.Replace(specialChars[i].ToString(), null);
