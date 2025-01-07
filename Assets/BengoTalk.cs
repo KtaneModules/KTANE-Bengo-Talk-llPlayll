@@ -73,10 +73,22 @@ public class BengoTalk : MonoBehaviour
         "Twenty three in\nninety when you're\nboth ready.",
         "I can feel the\nDelirium coming\ninside me.",
         "Buy me Prada!\n(no-no, no)\nBalenciaga!\n(no-no, no)",
-        "No, I need\nto zoom!"
+        "No, I need\nto zoom!",
+        "The CLASSIC\nPlay boss\ncheck.",
+        "Chinese\nCounting\nLEDs.",
+        "Wait, is that\non Bengo Talk?",
+        "Hazel,\ndo Dungeon.",
+        "",
+        "Locked in a cage\nfor a really long time\n(time, time, oooh)...",
+        "Hold on, I need\nto FEEL the bomb.",
+        "I have to go\nto sleep in\nseven hours!!!",
+        "Echo, November,\nSierra Sierra\nSierra Sierra...",
+        "Can you club?",
+        "There's only five\nlevers to remember,\nhow are you messing\nthis up?",
+        "Would you believe me\nif I missed seventeen\nstages of Forget Me Not?",
     };
-    List<int> firstLetterPos = new List<int>() { 5, 19, 23, 17, 15, 6, 20, 19, 15, 15, 15, 9, 15, 23, 4, 8, 9, 13, 4, 15, 13, 2, 20, 12, 20, 9, 23, 25, 16, 16, 20, 20, 9, 26, 4, 3, 9, 4, 25, 15, 20, 9, 2, 14 };
-    List<int> comfyTextSizes = new List<int>() { 120, 115, 90, 75, 90, 75, 100, 85, 110, 120, 90, 90, 100, 90, 75, 110, 95, 95, 100, 145, 54, 70, 95, 90, 50, 40, 120, 70, 140, 70, 125, 125, 115, 70, 50, 85, 130, 80, 70, 85, 75, 85, 90, 140 };
+    List<int> firstLetterPos = new List<int>() { 5, 19, 23, 17, 15, 6, 20, 19, 15, 15, 15, 9, 15, 23, 4, 8, 9, 13, 4, 15, 13, 2, 20, 12, 20, 9, 23, 25, 16, 16, 20, 20, 9, 26, 4, 3, 9, 4, 25, 15, 20, 9, 2, 14, 20, 3, 23, 8, -1, 12, 8, 9, 5, 3, 20, 23 };
+    List<int> comfyTextSizes = new List<int>() { 120, 115, 90, 75, 90, 75, 100, 85, 110, 120, 90, 90, 100, 90, 75, 110, 95, 95, 100, 145, 54, 70, 95, 90, 50, 40, 120, 70, 140, 70, 125, 125, 115, 70, 50, 85, 130, 80, 70, 85, 75, 85, 90, 140, 105, 125, 90, 110, 95, 70, 80, 100, 85, 100, 65, 55 };
 
     int phraseIndex;
     string chosenPhrase, targetPhrase;
@@ -145,6 +157,17 @@ public class BengoTalk : MonoBehaviour
 
     void Start()
     {
+        if (Bomb.GetSerialNumberNumbers().Last() % 2 == 0)
+        {
+            bengoPhrases[48] = "Legend knows.";
+            firstLetterPos[48] = 12;
+        }
+        else
+        {
+            bengoPhrases[48] = "Grand knows.";
+            firstLetterPos[48] = 7;
+        }
+
         PhraseWordGeneration();
         BengoGeneration();
         LetterAssigning();
